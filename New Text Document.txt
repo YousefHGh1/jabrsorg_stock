@@ -1,0 +1,5 @@
+INSERT INTO invoice_products 
+SELECT ROW_NUMBER() OVER (ORDER BY i.id) AS id, i.id,
+it.`id`, ri.`in_quantity`, ri.`price`, ri.time_stamp, ri.time_stamp
+FROM `recieved_items` AS ri, `invoices` AS i, `items` AS it
+WHERE ri.invoice_no = i.invoice_no AND it.id = ri.item_no;
